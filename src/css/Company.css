@@ -1,0 +1,200 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background: #8B0000;
+  gap: 0;
+}
+
+.contact-us-heading {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.contact-cards-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  gap: 32px;
+  padding-bottom: 10vh;
+  max-width: 1500px;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.glass {
+  position: relative;
+  width: 22vh;
+  min-width: 260px;
+  height: 32vh;
+  min-height: 272px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.11),
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 16px;
+  margin: 0;
+  backdrop-filter: blur(12px);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
+  padding: 14px 12px;
+  flex: 0 0 auto;
+}
+
+.container:hover .glass {
+  z-index: 2;
+}
+
+.contact-icon {
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-info {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.contact-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.contact-handle {
+  font-size: 0.96rem;
+  color: #dadada;
+}
+
+/* Person in charge section */
+.person-in-charge {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.contact-photo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #222;
+  border: 2px solid #fff2;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.person-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+}
+
+.person-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.person-title {
+  font-size: 0.95rem;
+  color: #59adfa;
+  font-weight: 500;
+}
+
+.person-contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 3px;
+}
+
+.person-contact-details a {
+  font-size: 0.91rem;
+  color: #97cfff;
+  text-decoration: underline;
+  word-break: break-all;
+  margin-bottom: 1px;
+  transition: color 0.2s;
+}
+
+.person-contact-details a:hover {
+  color: #fff;
+}
+
+.contact-us-section {
+  min-width: 360px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .glass {
+    width: 90vw;
+    max-width: 340px;
+    min-width: 220px;
+    height: auto;
+    min-height: 220px;
+    transform: none !important;
+    padding: 12px 8px;
+  }
+  .container {
+    height: auto;
+    min-width: unset;
+    padding-bottom: 28px;
+  }
+}
+@media (max-width: 700px) {
+  .container,
+  .contact-us-section,
+  .contact-cards-wrapper
+   {
+    flex-direction: column;
+    height: auto;
+    min-width: unset;
+    align-items: center;
+  }
+  .glass {
+    margin: 0;
+    width: 90vw;
+    max-width: 340px;
+    min-width: 200px;
+    height: auto;
+    min-height: 180px;
+    transform: none !important;
+    padding: 12px 8px;
+  }
+}

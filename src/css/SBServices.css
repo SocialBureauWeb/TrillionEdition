@@ -1,0 +1,83 @@
+.carousel-root {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.carousel-cards-frame {
+  position: relative;
+  width: 100vw;
+  max-width: 120vh;
+  height: 65vh;
+  min-height: 400px;
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+}
+.carousel-subheading {
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+  padding-top: 3%;
+  background-color: #000;
+  font-family:serif;
+}
+
+.carousel-card {
+  box-shadow: 0 10px 36px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.2);
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #222;
+  cursor: pointer;
+  padding: 2vh;
+}
+
+.gallery-card{
+     width: 50vh;
+}
+.gallery-card-img {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.gallery-card-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: 'Georgia', serif;
+  padding: 0 20px 30px 20px;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  pointer-events: none;
+  user-select: none;
+}
+
+.carousel-arrow {  
+  background: #8B0000;
+  color: #000000;
+  border: none;
+  font-size: 2.5rem;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+  position: relative;
+}
+.carousel-arrow.left { margin-right: 12px; }
+.carousel-arrow.right { margin-left: 12px; }
+.carousel-arrow:hover { background: rgba(255,255,255,0.34); }

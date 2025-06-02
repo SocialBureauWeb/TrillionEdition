@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+  background-color: #000000;
+}
+.macque {
+  height: 100px;
+  padding: 1rem;
+  font-size: 1.9rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #000000;   /* Tailwind's rounded-lg */
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); /* Tailwind's shadow-lg */
+}
+.w-full {
+  width: 100%;
+}
+
+.parallax {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  padding: 0 20px;
+  background-image: url('assets/bg2.jpg'); /* Optional fallback image */
+}
+
+/* Optional dark overlay */
+.parallax::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* Ensures video covers the section */
+  object-position: center; /* Centers the video content */
+  z-index: 0;
+  pointer-events: none;    /* Prevents video from blocking scroll/touch */
+}
+
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+}
+
+#services {
+  background-image: url('assets/bg2.jpg');
+  
+}
+
+
+.mid {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+}
+
+.content {
+  padding: 80px 20px;
+  background: #000000;
+  color: #333;
+  text-align: center;
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+  background-color: #222;
+  color: #ccc;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .parallax {
+    height: 70vh;
+  }
+  .bg-video {
+    height: 70vh;
+  }
+
+  .content {
+    padding: 60px 15px;
+  }
+}
+

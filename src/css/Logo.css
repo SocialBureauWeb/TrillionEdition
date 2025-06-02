@@ -1,0 +1,21 @@
+.overlay-content {
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  transition: opacity 0.3s ease; /* Smooth transition for visibility */
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto; /* Allow interaction when visible */
+}
+.logo {
+  max-width: 100vh; /* or a smaller value like 4vh, 50px, etc. */
+  width: 100%;
+  height: auto;
+}
+
