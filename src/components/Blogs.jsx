@@ -173,7 +173,7 @@ export default function Blogs() {
             key={art.title}
             style={{
               flex: "0 0 auto",
-              background: "linear-gradient(160deg,#8B0000 80%, white 20%)",
+              background: "linear-gradient(160deg, #8B0000 80%, white 20%)",
               padding: "1.1rem 1.1rem 1rem 1.1rem",
               margin:'1rem',
               minWidth: 260,
@@ -215,8 +215,8 @@ export default function Blogs() {
                 href="#"
                 style={{
                   fontSize: "0.93rem",
-                  color: "#222b3a",
-                  textDecoration: "underline",
+                 color: "white",
+                  textDecoration: "none",
                   fontWeight: 400,
                   marginRight: "0.7rem",
                   transition: "color 0.2s",
@@ -226,7 +226,7 @@ export default function Blogs() {
               </a>
               <span
                 style={{
-                  color: "#5a5a5a",
+                 color: "white",
                   fontSize: "0.85rem",
                 }}
               >

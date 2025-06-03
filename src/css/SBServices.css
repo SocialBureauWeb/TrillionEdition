@@ -20,13 +20,14 @@
   margin: 0 auto;
   overflow: visible;
 }
+
 .carousel-subheading {
   text-align: center;
   font-size: 2rem;
   color: #ffffff;
   padding-top: 3%;
   background-color: #000;
-  font-family:serif;
+  font-family: serif;
 }
 
 .carousel-card {
@@ -41,9 +42,12 @@
   padding: 2vh;
 }
 
-.gallery-card{
-     width: 50vh;
+.gallery-card {
+  width: 50vh;
+  min-width: 240px;
+  max-width: 96vw;
 }
+
 .gallery-card-img {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -65,9 +69,10 @@
   user-select: none;
 }
 
+/* Arrow Styles */
 .carousel-arrow {  
   background: #8B0000;
-  color: #000000;
+  color: #ffffff;
   border: none;
   font-size: 2.5rem;
   border-radius: 50%;
@@ -77,7 +82,73 @@
   z-index: 10;
   transition: background 0.2s;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .carousel-arrow.left { margin-right: 12px; }
 .carousel-arrow.right { margin-left: 12px; }
 .carousel-arrow:hover { background: rgba(255,255,255,0.34); }
+
+/* --- MOBILE RESPONSIVE STYLES --- */
+@media (max-width: 900px) {
+  .carousel-cards-frame {
+    max-width: 96vw;
+    min-height: 300px;
+    height: 48vh;
+  }
+  .gallery-card {
+    width: 38vh;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-root {
+    flex-direction: column;
+    height: 100dvh;
+  }
+  .carousel-subheading {
+    font-size: 1.3rem;
+    padding-top: 5vw;
+  }
+  .carousel-cards-frame {
+    height: 36vh;
+    min-height: 170px;
+    max-width: 99vw;
+  }
+  .gallery-card {
+    width: 78vw;
+    min-width: 120px;
+    max-width: 96vw;
+    padding: 1vh 0.5vw;
+    border-radius: 22px;
+  }
+  .gallery-card-text {
+    font-size: 1.01rem;
+    padding: 0 7px 12px 7px;
+  }
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 1.7rem;
+    margin: 0 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .carousel-cards-frame {
+    height: 31vh;
+    min-height: 100px;
+    max-width: 99vw;
+  }
+  .gallery-card {
+    width: 96vw;
+    min-width: 60px;
+    border-radius: 17px;
+  }
+  .gallery-card-text {
+    font-size: 0.88rem;
+    padding: 0 2px 7px 2px;
+  }
+}

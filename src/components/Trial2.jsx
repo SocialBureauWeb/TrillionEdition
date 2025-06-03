@@ -114,11 +114,10 @@ export const Trial2 = () => {
               key={blog.id}
               style={{
                 padding: '14px 24px 13px 30px',
-                borderLeft: selected && selected.id === blog.id ? '4px solid #8B0000' : '4px solid transparent',
+                borderBottom: selected && selected.id === blog.id ? '4px solid #8B0000' : '4px solid transparent',
                 marginBottom: 10,
                 background:'transparent',
-                border: selected && selected.id === blog.id ? '5px solid  #8B0000' : 'transparent',
-                borderRadius: '0 8px 8px 0',
+                
                 cursor: 'pointer',
                 transition: 'background 0.2s, border 0.2s',
                 boxShadow: selected && selected.id === blog.id ? '0 2px 10px rgba(96, 198, 0, 0.13)' : undefined
@@ -177,7 +176,7 @@ export const Trial2 = () => {
                   background: 'none',
                   border: 'none',
                   fontSize: 26,
-                  color: '#333',
+                  color: 'white',
                   cursor: 'pointer',
                   fontWeight: 400,
                 }}
@@ -187,7 +186,7 @@ export const Trial2 = () => {
                 &times;
               </button>
               <h2 style={{ margin: '0 0 14px', color: 'white' }}>{selected.title}</h2>
-              <div style={{ fontSize: 15, color: 'black', marginBottom: 8 }}>
+              <div style={{ fontSize: 15, color: 'white', marginBottom: 8 }}>
                 <strong>By:</strong> {selected.author}
                 {' '}|{' '}
                 <strong>Published:</strong> {selected.published}

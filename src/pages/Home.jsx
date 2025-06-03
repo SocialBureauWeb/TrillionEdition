@@ -23,6 +23,7 @@ import Review from '../components/Review';
 import Fade from '../components/Fade';
 import { Trial2 } from '../components/Trial2';
 import Sample from '../components/Sample';
+import Effect1 from '../components/Effect1';
 
 const Home = () => {
   const headerRef = useRef(null);
@@ -83,6 +84,7 @@ const Home = () => {
       </Fade>
       <Fade delay={0.7}><section id='service'><Services/></section></Fade>
       <Fade delay={0.8}><SBServices/></Fade>
+      <Fade delay={0.8}><Effect1/></Fade>
       <Fade delay={0.9}><RBServices/></Fade>
       <Fade delay={0.95}><Trial2/></Fade>
       <Fade delay={1.0}><Clients/></Fade>

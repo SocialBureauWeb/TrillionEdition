@@ -62,7 +62,6 @@ const positionStyles = [
     zIndex: 2,
     filter: "brightness(0.9)",
     opacity: 0.75,
-    // boxShadow: "0 0 5px 3px #E94057"
   },
   {
     transform: "translateX(0%) scale(1)",
@@ -75,38 +74,47 @@ const positionStyles = [
     zIndex: 2,
     filter: "brightness(0.9)",
     opacity: 0.75,
-    // boxShadow: "0 0 5px 3px #E94057"
   }
 ];
 
-// Updated CSS with hover text styles
 const borderAndShadowAnimationStyle = `
-// @keyframes animated-gradient {
-//   0% { border-image-source: linear-gradient(0deg, #E94057, #7D3C98); }
-//   25% { border-image-source: linear-gradient(90deg, #7D3C98, #E94057); }
-//   50% { border-image-source: linear-gradient(180deg, #E94057, #7D3C98); }
-//   75% { border-image-source: linear-gradient(270deg, #7D3C98, #E94057); }
-//   100% { border-image-source: linear-gradient(360deg, #E94057, #7D3C98); }
-// }
-// .animated-gradient-border {
-//   border: 3px solid transparent;
-//   border-radius: 22px;
-//   border-image-slice: 2;
-//   border-width: 3px;
-//   animation: animated-gradient 2.5s linear infinite;
-// }
-
-// @keyframes animated-box-shadow {
-//   0% { box-shadow: 0 0 8px 3px #E94057, 0 0 20px 8px #7D3C9833; }
-//   25% { box-shadow: 0 0 12px 5px #7D3C98, 0 0 25px 10px #; }
-//   50% { box-shadow: 0 0 8px 3px #E94057, 0 0 20px 8px #7D3C9833; }
-//   75% { box-shadow: 0 0 15px 4px #E94057, 0 0 30px 12px #7D3C9844; }
-//   100% { box-shadow: 0 0 8px 3px #E94057, 0 0 20px 8px #7D3C9833; }
-// }
-// .animated-box-shadow {
-//   animation: animated-box-shadow 2.5s linear infinite;
-// }
-
+@media (max-width: 600px) {
+  .carousel-cards-frame {
+    height: 48vh !important;
+    margin-top: 3vh !important;
+    margin-bottom: 30vh !important;
+  }
+  .carousel-card {
+    height: 60vh !important;
+    width: 90vw !important;
+    min-width: unset !important;
+    left: 5% !important;
+    top: 15% !important;
+    margin: 0 !important;
+  }
+  .gallery-card-img, .carousel-card .gallery-card-img {
+    border-radius: 14px 14px 0 0 !important;
+  }
+  .hover-text {
+    font-size: 4vw !important;
+    padding: 8px !important;
+  }
+  .carousel-card h2 {
+    font-size: 6vw !important;
+  }
+  .carousel-card p {
+    font-size: 4vw !important;
+    padding: 0 2vw;
+  }
+}
+@media (max-width: 400px) {
+  .carousel-card {
+    height: 50vh !important;
+    width: 96vw !important;
+    left: 2% !important;
+    top: 18% !important;
+  }
+}
 @keyframes fadeOutCards {
   0% { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.7); }
@@ -122,13 +130,11 @@ const borderAndShadowAnimationStyle = `
 .card-fade-in {
   animation: fadeInCards 1s forwards cubic-bezier(.4,2,.5,1);
 }
-
-/* New hover text styles */
 .hover-text {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.7); 
   color: #fff;
   text-align: center;
   padding: 10px;
@@ -136,11 +142,15 @@ const borderAndShadowAnimationStyle = `
   font-weight: 400;
   opacity: 0;
   transition: opacity 0.3s ease;
-  // border-radius: 0 0 18px 18px; /* Match card bottom corners */
 }
-
 .carousel-card:hover .hover-text {
   opacity: 1;
+}
+/* Added box-shadow for every card on hover */
+.carousel-card:hover {
+  box-shadow: 0 0 20px 6px rgb(255, 255, 255), 0 0 40px 14px #7D3C9844;
+  transition: box-shadow 0.3s cubic-bezier(.4,2,.5,1);
+  z-index: 4; /* bring hovered card in front */
 }
 `;
 
@@ -233,6 +243,53 @@ const EffectCard = () => {
     setCenterIdx3((prev) => (prev + pos + cards3.length) % cards3.length);
   };
 
+  const getCardStyle = (pos) => {
+    let style = {
+      ...positionStyles[CARD_POSITIONS.indexOf(pos)],
+      position: "absolute",
+      top: "40%",
+      left: "45%",
+      height: pos === 0 ? "90vh" : "80vh",
+      width: "28vw",
+      margin: "-16vh",
+      background: "linear-gradient(135deg, #1E1E1E 80%, #D0D0D0 20%)",
+      borderRadius: "22px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      transition:
+        "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s, border 0.5s, box-shadow 0.5s",
+      cursor: pos !== 0 ? "pointer" : "default",
+      pointerEvents: transitioning ? "none" : "auto",
+      border: pos === 0 ? undefined : "2px solid transparent"
+    };
+    if (typeof window !== "undefined") {
+      const vw = window.innerWidth;
+      if (vw < 600) {
+        style = {
+          ...style,
+          height: "60vh",
+          width: "90vw",
+          minWidth: "unset",
+          left: "5%",
+          top: "15%",
+          margin: 0,
+          borderRadius: "14px"
+        };
+      } else if (vw < 400) {
+        style = {
+          ...style,
+          height: "50vh",
+          width: "96vw",
+          left: "2%",
+          top: "18%",
+        };
+      }
+    }
+    return style;
+  };
+
   return (
     <>
       <div
@@ -240,7 +297,7 @@ const EffectCard = () => {
         style={{
           position: "relative",
           backgroundColor: "black",
-          minHeight: "130vh"
+          minHeight: "100vh"
         }}
       >
         <div
@@ -264,26 +321,7 @@ const EffectCard = () => {
                 <div
                   className={`gallery-card carousel-card ${extraClass} ${transitioning ? "card-fade-out" : ""}`}
                   key={`first-${i}`}
-                  style={{
-                    ...positionStyles[i],
-                    position: "absolute",
-                    top: "40%",
-                    left: "45%",
-                    height: pos === 0 ? "90vh" : "80vh",
-                    width: "28vw",
-                    margin: "-16vh",
-                     background: "linear-gradient(135deg, #1E1E1E 80%, #D0D0D0 20%)",
-                    borderRadius: "22px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    transition:
-                      "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s, border 0.5s, box-shadow 0.5s",
-                    cursor: pos !== 0 ? "pointer" : "default",
-                    pointerEvents: transitioning ? "none" : "auto",
-                    border: pos === 0 ? undefined : "2px solid transparent"
-                  }}
+                  style={getCardStyle(pos)}
                   onClick={() => handleCardClick(pos)}
                 >
                   <div
@@ -294,7 +332,7 @@ const EffectCard = () => {
                       borderRadius: "18px 18px 0 0",
                       background: `url(${card.image}) center/contain no-repeat`,
                       backgroundColor: "linear-gradient(to right, black, #E9405733)",
-                      position: "relative" // For positioning hover text
+                      position: "relative"
                     }}
                   >
                     <div className="hover-text">{card.text}</div>
@@ -314,25 +352,7 @@ const EffectCard = () => {
                 <div
                   className={`gallery-card carousel-card ${extraClass}`}
                   key={`second-${i}`}
-                  style={{
-                    ...positionStyles[i],
-                    position: "absolute",
-                    top: "40%",
-                    left: "45%",
-                    height: pos === 0 ? "90vh" : "80vh",
-                    width: "28vw",
-                    margin: "-16vh",
-                    background: "linear-gradient(135deg, #1E1E1E 20%, #D0D0D0 80%)",
-                    borderRadius: "22px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    transition:
-                      "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s, border 0.5s, box-shadow 0.5s",
-                    cursor: pos !== 0 ? "pointer" : "default",
-                    border: pos === 0 ? undefined : "2px solid transparent"
-                  }}
+                  style={getCardStyle(pos)}
                   onClick={() => handleCardClick2(pos)}
                 >
                   {card.isTextCard ? (
@@ -358,6 +378,7 @@ const EffectCard = () => {
                           marginBottom: "1.4vw",
                           color: "#BC430D"
                         }}
+                        className="carousel-card-title"
                       >
                         {card.text}
                       </h2>
@@ -369,6 +390,7 @@ const EffectCard = () => {
                           lineHeight: 1.45,
                           textAlign: "center"
                         }}
+                        className="carousel-card-body"
                       >
                         {card.body}
                       </p>
@@ -382,7 +404,7 @@ const EffectCard = () => {
                         borderRadius: "18px 18px 0 0",
                         background: `url(${card.image}) center/contain no-repeat`,
                         backgroundColor: "black",
-                        position: "relative" // For positioning hover text
+                        position: "relative"
                       }}
                     >
                       <div className="hover-text">{card.text}</div>
@@ -403,25 +425,7 @@ const EffectCard = () => {
                 <div
                   className={`gallery-card carousel-card ${extraClass}`}
                   key={`third-${i}`}
-                  style={{
-                    ...positionStyles[i],
-                    position: "absolute",
-                    top: "40%",
-                    left: "45%",
-                    height: pos === 0 ? "90vh" : "80vh",
-                    width: "28vw",
-                    margin: "-16vh",
-                    background: "linear-gradient(135deg, #1E1E1E 20%, #D0D0D0 80%)",
-                    borderRadius: "22px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    transition:
-                      "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s, border 0.5s, box-shadow 0.5s",
-                    cursor: pos !== 0 ? "pointer" : "default",
-                    border: pos === 0 ? undefined : "2px solid transparent"
-                  }}
+                  style={getCardStyle(pos)}
                   onClick={() => handleCardClick3(pos)}
                 >
                   {card.isTextCard ? (
@@ -447,6 +451,7 @@ const EffectCard = () => {
                           marginBottom: "1.4vw",
                           color: "#BC430D"
                         }}
+                        className="carousel-card-title"
                       >
                         {card.text}
                       </h2>
@@ -458,6 +463,7 @@ const EffectCard = () => {
                           lineHeight: 1.45,
                           textAlign: "center"
                         }}
+                        className="carousel-card-body"
                       >
                         {card.body}
                       </p>
@@ -471,7 +477,7 @@ const EffectCard = () => {
                         borderRadius: "18px 18px 0 0",
                         background: `url(${card.image}) center/contain no-repeat`,
                         backgroundColor: "black",
-                        position: "relative" // For positioning hover text
+                        position: "relative"
                       }}
                     >
                       <div className="hover-text">{card.text}</div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "../css/SBServices.css";
 
@@ -37,10 +36,9 @@ const cards = [
   }
 ];
 
-const CARD_POSITIONS = [-2, -1, 0, 1, 2]; // leftmost to rightmost
+const CARD_POSITIONS = [-2, -1, 0, 1, 2];
 
 const positionStyles = [
-  // leftmost
   {
     transform: "translateX(-180%) scale(0.7)",
     zIndex: 1,
@@ -48,7 +46,6 @@ const positionStyles = [
     opacity: 0.5,
     boxShadow: "0 0 10px 5px #8B0000"
   },
-  // left
   {
     transform: "translateX(-90%) scale(0.85)",
     zIndex: 2,
@@ -56,15 +53,13 @@ const positionStyles = [
     opacity: 0.8,
     boxShadow: "0 0 13px 8px #8B0000"
   },
-  // center
- {
-  transform: "translateX(0%) scale(1)",
-  zIndex: 3,
-  filter: "brightness(1)",
-  opacity: 1,
-  boxShadow: "0 0 15px 10px #8B0000"
-},
-  // right
+  {
+    transform: "translateX(0%) scale(1)",
+    zIndex: 3,
+    filter: "brightness(1)",
+    opacity: 1,
+    boxShadow: "0 0 15px 10px #8B0000"
+  },
   {
     transform: "translateX(90%) scale(0.85)",
     zIndex: 2,
@@ -72,7 +67,6 @@ const positionStyles = [
     opacity: 0.8,
     boxShadow: "0 0 13px 8px #8B0000"
   },
-  // rightmost
   {
     transform: "translateX(180%) scale(0.7)",
     zIndex: 1,
@@ -97,41 +91,39 @@ const SBServices = () => {
 
   return (
     <>
-    <h4 className="carousel-subheading">SocialBureau Services</h4>
-    <div className="carousel-root">
-       
-      <button className="carousel-arrow left" onClick={slideLeft}>&#8592;</button>
-      <div className="carousel-cards-frame">
-        {CARD_POSITIONS.map((pos, i) => {
-          const card = getCard(pos);
-          return (
-            <div
-              className="gallery-card carousel-card"
-              key={i}
-              style={{
-                ...positionStyles[i],
-                position: "absolute",
-                top: "40%",
-                left: "45%",
-                height: pos === 0 ? "56vh" : pos === -1 || pos === 1 ? "44vh" : "32vh",
-                margin: "-16vh ",
-                transition:
-                  "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s",
-                pointerEvents: pos === 0 ? "auto" : "none",
-              }}
-            >
-              <div 
-  className="gallery-card-img" 
-  style={{ background: card.background }} 
->
-</div>
-              <div className="gallery-card-text">{card.text}</div>
-            </div>
-          );
-        })}
+      <h4 className="carousel-subheading">SocialBureau Services</h4>
+      <div className="carousel-root">
+        <button className="carousel-arrow left" onClick={slideLeft}>&#8592;</button>
+        <div className="carousel-cards-frame">
+          {CARD_POSITIONS.map((pos, i) => {
+            const card = getCard(pos);
+            return (
+              <div
+                className="gallery-card carousel-card"
+                key={i}
+                style={{
+                  ...positionStyles[i],
+                  position: "absolute",
+                  top: "40%",
+                  left: "45%",
+                  height: pos === 0 ? "56vh" : pos === -1 || pos === 1 ? "44vh" : "32vh",
+                  margin: "-16vh ",
+                  transition:
+                    "transform 0.5s cubic-bezier(.4,2,.5,1), z-index 0.5s, filter 0.5s, opacity 0.5s, height 0.5s",
+                  pointerEvents: pos === 0 ? "auto" : "none",
+                }}
+              >
+                <div 
+                  className="gallery-card-img" 
+                  style={{ background: card.background }} 
+                />
+                <div className="gallery-card-text">{card.text}</div>
+              </div>
+            );
+          })}
+        </div>
+        <button className="carousel-arrow right" onClick={slideRight}>&#8594;</button>
       </div>
-      <button className="carousel-arrow right" onClick={slideRight}>&#8594;</button>
-    </div>
     </>
   );
 };

@@ -110,7 +110,7 @@ const styles = {
   },
   eventCardTitle: {
     fontSize: "28px",
-    color: "#fff",
+    color: "#8B0000",
     margin: "0 0 12px 0",
   },
   eventCardMeta: {
@@ -295,7 +295,7 @@ const Events = () => {
 
   return (
     <div style={styles.eventPage}>
-      <h1 style={{ marginBottom: "24px", color: "#8B0000", letterSpacing: "2px" }}>Events</h1>
+      <h1 style={{ marginBottom: "24px", color: "white", letterSpacing: "2px" }}>Events</h1>
       <div style={styles.cardSlider}>
         <button
           style={{
