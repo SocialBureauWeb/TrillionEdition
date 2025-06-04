@@ -24,6 +24,9 @@ import Fade from '../components/Fade';
 import { Trial2 } from '../components/Trial2';
 import Sample from '../components/Sample';
 import Effect1 from '../components/Effect1';
+import Effect2 from '../components/Effect2';
+import Effect3 from '../components/Effect3';
+import Effect4 from '../components/Effect4';
 
 const Home = () => {
   const headerRef = useRef(null);
@@ -82,10 +85,13 @@ const Home = () => {
           <h4>Our Services</h4>
         </section>
       </Fade>
+      <Fade delay={0.7}><section id='service'><Effect3/></section></Fade>
       <Fade delay={0.7}><section id='service'><Services/></section></Fade>
+      <Fade delay={0.8}><Effect4/></Fade>
       <Fade delay={0.8}><SBServices/></Fade>
       <Fade delay={0.8}><Effect1/></Fade>
       <Fade delay={0.9}><RBServices/></Fade>
+      <Fade delay={0.8}><Effect2/></Fade>
       <Fade delay={0.95}><Trial2/></Fade>
       <Fade delay={1.0}><Clients/></Fade>
       <Fade delay={1.1}><Events/></Fade>
