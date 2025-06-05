@@ -1,6 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const styles = {
+// Responsive helper: determine current window width
+function useWindowWidth() {
+  const [width, setWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1200
+  );
+  useEffect(() => {
+    const cb = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", cb);
+    return () => window.removeEventListener("resize", cb);
+  }, []);
+  return width;
+}
+
+const baseStyles = {
   eventPage: {
     background: "#111",
     padding: "40px 0",
@@ -8,7 +21,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width:'100%'
+    width: "100%",
   },
   cardSlider: {
     display: "flex",
@@ -17,6 +30,9 @@ const styles = {
     width: "100%",
     position: "relative",
     color: "#8B0000",
+    maxWidth: "950px",
+    minWidth: 0,
+    justifyContent: "center",
   },
   navButton: {
     background: "#222",
@@ -53,13 +69,15 @@ const styles = {
     boxSizing: "border-box",
     transition: "box-shadow 0.2s",
     boxShadow: "0 2px 16px #8B0000",
-    flexDirection: "column", // Change to column for details to go full width
-    position: "relative"
+    flexDirection: "column",
+    position: "relative",
+    maxWidth: "760px",
+    minWidth: "0"
   },
   eventMainRow: {
     display: "flex",
     flexDirection: "row",
-    width: "100%"
+    width: "100%",
   },
   eventCardDate: {
     display: "flex",
@@ -107,22 +125,26 @@ const styles = {
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    minWidth: 0
   },
   eventCardTitle: {
     fontSize: "28px",
     color: "#8B0000",
     margin: "0 0 12px 0",
+    wordBreak: "break-word",
   },
   eventCardMeta: {
     color: "#bbb",
     fontSize: "16px",
     marginBottom: "16px",
+    wordBreak: "break-word",
   },
   eventCardDesc: {
     color: "#e0e0e0",
     fontSize: "16px",
     marginBottom: "20px",
     maxWidth: "450px",
+    wordBreak: "break-word",
   },
   eventCardDetails: {
     color: "#8B0000",
@@ -154,6 +176,56 @@ const styles = {
     boxSizing: "border-box"
   }
 };
+
+// Responsive style variants
+const variants = [
+  {
+    breakpoint: 900,
+    styles: {
+      cardSlider: { maxWidth: '99vw' },
+      eventCard: { maxWidth: '99vw', padding: "20px" },
+      eventMainRow: { flexDirection: "column", alignItems: "stretch" },
+      eventCardDate: { flexDirection: "row", width: "auto", borderRight: "none", borderBottom: "1px solid #222", padding: "0 0 14px 0", marginRight: 0, marginBottom: "18px" },
+      eventCardImage: { marginRight: 0, minWidth: "100%", maxWidth: "100%", height: "180px", marginBottom: "18px" },
+      eventCardContent: { minWidth: 0 },
+      eventCardTitle: { fontSize: "22px" },
+      eventCardMeta: { fontSize: "15px" },
+      eventCardDesc: { fontSize: "14px", maxWidth: "100%" },
+      navButton: { width: "38px", height: "38px", fontSize: "1.5rem", margin: "0 7px" },
+      detailsSection: { padding: "12px 10px", fontSize: "15px" }
+    }
+  },
+  {
+    breakpoint: 600,
+    styles: {
+      eventPage: { padding: "15px 0" },
+      cardSlider: { maxWidth: '100vw' },
+      eventCard: { maxWidth: "99vw", padding: "7vw 0.5vw", boxShadow: "0 1px 8px #8B0000" },
+      eventMainRow: { flexDirection: "column", alignItems: "stretch" },
+      eventCardDate: { flexDirection: "row", width: "auto", borderRight: "none", borderBottom: "1px solid #222", padding: "0 0 8px 0", marginRight: 0, marginBottom: "11px", fontSize: "15px" },
+      eventCardImage: { marginRight: 0, minWidth: "100%", maxWidth: "100%", height: "120px", marginBottom: "10px" },
+      eventCardContent: { minWidth: 0 },
+      eventCardTitle: { fontSize: "18px" },
+      eventCardMeta: { fontSize: "13px" },
+      eventCardDesc: { fontSize: "12px", maxWidth: "100%" },
+      navButton: { width: "30px", height: "30px", fontSize: "1.1rem", margin: "0 4px" },
+      detailsSection: { padding: "7px 5px", fontSize: "12px" }
+    }
+  }
+];
+
+function useResponsiveStyles(base, width) {
+  // Merge variants into base if width is below breakpoint.
+  let merged = { ...base };
+  for (let v of variants) {
+    if (width <= v.breakpoint) {
+      for (const k in v.styles) {
+        merged[k] = { ...merged[k], ...v.styles[k] };
+      }
+    }
+  }
+  return merged;
+}
 
 const events = [
   {
@@ -219,6 +291,7 @@ const EventCard = ({
   details,
   showDetails,
   onViewDetails,
+  styles
 }) => (
   <div style={styles.eventCard}>
     <div style={styles.eventMainRow}>
@@ -244,23 +317,7 @@ const EventCard = ({
         <button
           style={styles.eventCardDetails}
           onClick={onViewDetails}
-          onMouseOver={e => {
-            e.target.style.borderBottom = "2px solid #fff";
-            e.target.style.color = "#8B0000";
-          }}
-          onMouseOut={e => {
-            e.target.style.borderBottom = "1px solid #666";
-            e.target.style.color = "#8B0000";
-          }}
           tabIndex={0}
-          onFocus={e => {
-            e.target.style.borderBottom = "2px solid #fff";
-            e.target.style.color = "#8B0000";
-          }}
-          onBlur={e => {
-            e.target.style.borderBottom = "1px solid #666";
-            e.target.style.color = "#8B0000";
-          }}
         >
           {showDetails ? "Hide Details" : "View More"}
         </button>
@@ -277,6 +334,8 @@ const EventCard = ({
 const Events = () => {
   const [current, setCurrent] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
+  const width = useWindowWidth();
+  const styles = useResponsiveStyles(baseStyles, width);
 
   const prev = () => {
     setCurrent(c => {
@@ -312,6 +371,7 @@ const Events = () => {
           {...events[current]}
           showDetails={showDetails}
           onViewDetails={handleViewDetails}
+          styles={styles}
         />
         <button
           style={{
