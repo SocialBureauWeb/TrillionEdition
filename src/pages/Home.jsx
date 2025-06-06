@@ -28,6 +28,10 @@ import Effect2 from '../components/Effect2';
 import Effect3 from '../components/Effect3';
 import Effect4 from '../components/Effect4';
 import OurTeam from '../components/OurTeam';
+import Scroll from '../components/Scroll';
+import TrillionEdition from '../components/TrillionEdition';
+import Cards from '../components/Cards';
+import Rotate from '../components/Rotate';
 
 const Home = () => {
   const headerRef = useRef(null);
@@ -71,8 +75,7 @@ const Home = () => {
       </header>
 
       <Fade delay={0.1}><Search/></Fade>
-      {/* <Fade delay={0.1}><OurTeam/></Fade> */}
-      
+      <Fade delay={0.1}><Rotate/></Fade>
       <Fade delay={0.2}>
         <div className="macque">
           <Marquee /* ...props... */>
@@ -90,37 +93,13 @@ const Home = () => {
       <Fade delay={0.8}><Effect4/></Fade>
       <Fade delay={0.7}><section id='service'><Services/></section></Fade>
       <Fade delay={0.8}><Effect1/></Fade>
-      <Fade delay={0.2}>
-          <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "40px 8vw 40px 8vw",
-        color: "white",
-        boxSizing: "border-box",
-      }}
-    >
-      <h3 style={{ margin: 0, fontSize: 24, textAlign: "center" }}>Our Team</h3>
-      <br />
-      <img
-        src="assets/teams.jpg"
-        alt="team img"
-        style={{
-          width: "100%",
-          maxWidth: 400,
-          height: "auto",
-          borderRadius: 12,
-          marginTop: 16,
-          boxShadow: "0 4px 18px #0008",
-        }}
-      />
-    </div>
-      </Fade>
+      <Fade delay={1.0}><Scroll/></Fade>
+      <Fade delay={0.1}><OurTeam/></Fade>
       <Fade delay={1.0}><Clients/></Fade>
       <Fade delay={1.3}><Review/></Fade>
       <Fade delay={1.2}><Blogs/></Fade>
+      <Fade delay={1.2}><Cards/></Fade>
+      <Fade delay={0.1}><TrillionEdition/></Fade>
       <Fade delay={0.3}><Trial/></Fade>
       <Fade delay={0.8}><SBServices/></Fade>
       <Fade delay={0.9}><RBServices/></Fade>

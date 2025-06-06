@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-// Example data (added more cards)
+// Example data (same as before)
 const featuredArticles = [
   {
     title: "Coinbase Flips The Coin On Would-Be Extortionists",
@@ -52,46 +52,7 @@ const featuredArticles = [
       "Full blog content for Quantum Computing & Cryptography. Understand what quantum computing means for cryptography.",
     link: "#",
   },
-  {
-    title: "Master Tech Mayhem: Technology & Innovation Summit APAC",
-    author: "Frederic Giron",
-    date: "May 15, 2025",
-    summary:
-      "For technology leaders in APAC, the pressing question is no longer about whether AI will transform your business but how you will leverage AI to lead your organization through global volatility and escalating costs. Learn how Technology & Innovation Summit APAC will equip you with the skills, practices, and platforms you need to master today’s tech mayhem and and navigate a volatile environment.",
-    content:
-      "Full blog content for Master Tech Mayhem: Technology & Innovation Summit APAC. This is the detailed article body.",
-    link: "#",
-  },
-  {
-    title: "AI In Security: Current Trends",
-    author: "Alex Smith",
-    date: "May 12, 2025",
-    summary:
-      "AI is changing the face of cybersecurity, enabling faster detection and remediation of threats. Explore the latest trends and what the future may hold.",
-    content:
-      "Full blog content for AI In Security: Current Trends. Insights into how AI is being used in cybersecurity.",
-    link: "#",
-  },
-  {
-    title: "The New Era Of Remote Work",
-    author: "Samantha Lane",
-    date: "May 10, 2025",
-    summary:
-      "Remote work is here to stay, but what does this mean for technology leaders and security teams? Dive into best practices for a distributed workforce.",
-    content:
-      "Full blog content for The New Era Of Remote Work. Tips and strategies for managing a remote workforce.",
-    link: "#",
-  },
-  {
-    title: "Quantum Computing & Cryptography",
-    author: "Dr. Emily Wong",
-    date: "May 8, 2025",
-    summary:
-      "Quantum computing promises to break current encryption standards. Learn how organizations can prepare for a post-quantum world.",
-    content:
-      "Full blog content for Quantum Computing & Cryptography. Understand what quantum computing means for cryptography.",
-    link: "#",
-  },
+  // You can add more articles as needed
 ];
 
 export default function Blogs() {
@@ -171,25 +132,8 @@ export default function Blogs() {
         {featuredArticles.map((art, idx) => (
           <div
             key={art.title}
-            style={{
-              flex: "0 0 auto",
-              background: "linear-gradient(160deg, #8B0000 80%, white 20%)",
-              padding: "1.1rem 1.1rem 1rem 1.1rem",
-              margin:'1rem',
-              minWidth: 260,
-              maxWidth: 300,
-              minHeight: 150,
-              boxSizing: "border-box",
-              borderRadius: "0.25rem",
-              boxShadow: "0 1.5px 6px rgba(10,10,10,0.07)",
-              marginBottom: "1rem",
-              opacity: 0,
-              transform: "translateY(24px)",
-              animation: "fadeInUp 0.8s cubic-bezier(.17,.67,.83,.67) forwards",
-              animationDelay: `${idx * 120}ms`,
-              transition: "box-shadow 0.2s",
-              position: "relative",
-            }}
+            className="card3d"
+            style={{ animationDelay: `${idx * 120}ms`, position: "relative" }}
           >
             <h2
               style={{
@@ -212,10 +156,10 @@ export default function Blogs() {
               }}
             >
               <a
-                href="#"
+                href={art.link}
                 style={{
                   fontSize: "0.93rem",
-                 color: "white",
+                  color: "white",
                   textDecoration: "none",
                   fontWeight: 400,
                   marginRight: "0.7rem",
@@ -226,7 +170,7 @@ export default function Blogs() {
               </a>
               <span
                 style={{
-                 color: "white",
+                  color: "white",
                   fontSize: "0.85rem",
                 }}
               >
@@ -307,9 +251,18 @@ export default function Blogs() {
             animation: "fadeInUp 0.6s cubic-bezier(.17,.67,.83,.67)",
           }}
         >
-          <h2 style={{marginTop:0, color:'white'}}>{featuredArticles[openIndex].title}</h2>
-          <div style={{marginBottom: "0.7rem", color: "#6a6a7a", fontSize: "0.96rem"}}>
-            By {featuredArticles[openIndex].author} &middot; {featuredArticles[openIndex].date}
+          <h2 style={{ marginTop: 0, color: "white" }}>
+            {featuredArticles[openIndex].title}
+          </h2>
+          <div
+            style={{
+              marginBottom: "0.7rem",
+              color: "#6a6a7a",
+              fontSize: "0.96rem",
+            }}
+          >
+            By {featuredArticles[openIndex].author} &middot;{" "}
+            {featuredArticles[openIndex].date}
           </div>
           <div>{featuredArticles[openIndex].content}</div>
         </div>
@@ -325,6 +278,45 @@ export default function Blogs() {
 }
 .cards-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.card3d {
+  flex: 0 0 auto;
+  background: linear-gradient(160deg, #8B0000 80%, white 20%);
+  padding: 1.1rem;
+  margin: 1rem;
+  min-width: 260px;
+  max-width: 300px;
+  min-height: 150px;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeInUp 0.8s cubic-bezier(.17,.67,.83,.67) forwards;
+}
+
+.card3d:hover {
+  transform: perspective(1000px) rotateY(8deg) rotateX(4deg) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
+}
+
+.card3d:hover::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #fff, #8B0000, #fff);
+  z-index: -1;
+  filter: blur(10px);
+  opacity: 0.2;
 }
         `}
       </style>
