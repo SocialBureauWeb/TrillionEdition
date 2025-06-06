@@ -125,9 +125,9 @@ export default function Effect3() {
         alignItems: "center",
         justifyContent: "center",
         color: "#fff",
-        minHeight: "120vh",
+        minHeight: "115vh",
         width: "100%",
-        padding: isMobile ? "28px 0" : "0",
+        padding: isMobile ? "0" : "0",
         boxSizing: "border-box",
       }}
     >

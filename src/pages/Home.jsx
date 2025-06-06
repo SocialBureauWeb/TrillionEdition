@@ -103,8 +103,8 @@ const Home = () => {
       <Fade delay={0.3}><Trial/></Fade>
       <Fade delay={0.8}><SBServices/></Fade>
       <Fade delay={0.9}><RBServices/></Fade>
-      <Fade delay={0.95}><Trial2/></Fade>      
       <Fade delay={1.1}><Events/></Fade>
+      <Fade delay={0.95}><Trial2/></Fade> 
       <Fade delay={0.8}><Effect2/></Fade>
        <Fade delay={0.4}><div id="mission"><EffectCard /></div></Fade>
       
